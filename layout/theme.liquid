@@ -5,7 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
+    {% if template contains 'product' and product.metafields.custom.seo_canonical_tag %}
+        <link rel="canonical" href="{{ product.metafields.custom.seo_canonical_tag }}" />
+      {% elsif template contains 'collection' and collection.metafields.custom.seo_canonical_tag %}
+        <link rel="canonical" href="{{ collection.metafields.custom.seo_canonical_tag }}" />
+      {% else %}
+        <link rel="canonical" href="{{ canonical_url }}" />
+    {% endif %}
+
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
     {%- if settings.favicon != blank -%}
